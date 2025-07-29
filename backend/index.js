@@ -9,6 +9,12 @@ dotenv.config();
 import { connectDB, sequelize } from './configu/database.js'; // fuerza conexión
 import {errorHandler} from './middleware/errorHandler.js';
 
+import authRoutes from './routes/auth.js';
+import workoutRoutes from './routes/workout.js';
+import exerciseRoutes from './routes/exercises.js';
+import routeRoutes from './routes/routes.js';
+import progressRoutes from './routes/progress.js';
+import userRoutes from './routes/user.routes.js';
 
 
 const app = express();
@@ -19,7 +25,12 @@ app.use(express.static('public')); // Para servir imágenes
 app.use(morgan('dev'));
 app.use(rateLimit({ windowMs: 15*60*1000, max: 100 }));
 
-
+app.use('/api/auth', authRoutes);
+app.use('/api/workout', workoutRoutes);
+app.use('/api/exercises', exerciseRoutes);
+app.use('/api/routes', routeRoutes);
+app.use('/api/progress', progressRoutes);
+app.use('/api/user', userRoutes);
 
 
 app.use(errorHandler);
